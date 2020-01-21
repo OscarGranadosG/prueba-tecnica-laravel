@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Pos;
 
+use App\Models\OpenPos;
+
 class PosDataManagement
 {
     private $data;
@@ -14,26 +16,19 @@ class PosDataManagement
 
     public function getDataOpenPos()
     {
-        $dataOpen = [
-            'date_open' => '2019/06/11',
-            'hour_open' => '12:45',
-            'value_previous_close' => '6280',
-            'value_open' => null,
-            'observation' => ''
-        ];
-        return $dataOpen; 
+        return OpenPos::getDataOpen()->get()->toArray(); 
     }
 
     public function saveDataOpenPos()
     {
-        $saveModel = [
+        $data = [
             'date_open' => $this->data['date_open'],
             'hour_open' => $this->data['hour_open'],
             'value_previous_close' => $this->data['value_previous_close'],
             'value_open' => $this->data['value_open'],
             'observation' => $this->data['observation']
         ];
-        return $saveModel;
+        return OpenPos::saveDataOpen($data);
     }
 
     public function getDataClosePos()
