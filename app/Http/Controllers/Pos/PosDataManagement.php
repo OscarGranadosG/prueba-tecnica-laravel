@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pos;
 
 use App\Models\ClosePos;
 use App\Models\OpenPos;
+use Illuminate\Support\Carbon;
 
 class PosDataManagement
 {
@@ -23,7 +24,7 @@ class PosDataManagement
     public function saveDataOpenPos()
     {
         $data = [
-            'date_open' => $this->data['date_open'],
+            'date_open' => date($this->data['date_open']),
             'hour_open' => $this->data['hour_open'],
             'value_previous_close' => $this->data['value_previous_close'],
             'value_open' => $this->data['value_open'],
