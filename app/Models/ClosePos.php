@@ -29,8 +29,8 @@ class ClosePos extends Model
         );
     }
 
-    public function saveDataClose($data)
+    public static function saveDataClose($data)
     {
-        return ClosePose::create($data);
+        return ClosePos::create($data);
     }
 }

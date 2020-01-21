@@ -51,12 +51,7 @@ class PosController extends Controller
     {
         try {
             return response()
-                ->json(['msg' => 'Success',
-                    'results' => true,
-                    'value' => $this->management->getDataClosePos()['value_cash'],
-                    'close' => $this->management->getDataClosePos()['value_close'],
-                    'card' => $this->management->getDataClosePos()['value_card']
-                ])
+                ->json($this->management->getDataClosePos())
                 ->setStatusCode(JsonResponse::HTTP_OK);
         } catch (\Exception $exception) {
             return response()

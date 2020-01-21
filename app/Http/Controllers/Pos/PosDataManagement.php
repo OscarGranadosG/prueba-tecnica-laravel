@@ -35,13 +35,23 @@ class PosDataManagement
 
     public function getDataClosePos()
     {
-        return ClosePos::getDataClose()->get()->toArray();
+        if(OpenPos::getValueOpen() == false) {
+            return "No se puede mostrar esta información";
+        }
+        else {
+            $dataClose = ClosePos::getDataClose()->get()->toArray();
+            $result = ['msg' => 'Success',
+                    'results' => true,
+                    $dataClose
+                ];
+            return $result;
+        } 
     }
 
     public function saveDataClosePos()
     {
         $data = [
-            'date_close' => $this->data['date_close'],
+            'date_close' => date($this->data['date_close']),
             'hour_close' => $this->data['hour_close'],
             'value_card' => $this->data['value_card'],
             'value_cash' => $this->data['value_cash'],
@@ -51,6 +61,6 @@ class PosDataManagement
         ];
 
         ClosePos::saveDataClose($data);
-        return $this->data['value_sales'];
+        return $this->data;
     }
 }

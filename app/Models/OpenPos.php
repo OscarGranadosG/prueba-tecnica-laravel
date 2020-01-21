@@ -35,4 +35,14 @@ class OpenPos extends Model
         return OpenPos::create($data);
     }
 
+    public static function getValueOpen(): bool
+    {
+        if(OpenPos::select('value_open') == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
 }
