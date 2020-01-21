@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pos;
 
+use App\Models\ClosePos;
 use App\Models\OpenPos;
 
 class PosDataManagement
@@ -33,13 +34,22 @@ class PosDataManagement
 
     public function getDataClosePos()
     {
-        $dataClose = [
-            'msg' => 'Success',
-            'results' => true,
-            'value' => '5000',
-            'close' => '0',
-            'card' => '0'
+        return ClosePos::getDataClose()->get()->toArray();
+    }
+
+    public function saveDataClosePos()
+    {
+        $data = [
+            'date_close' => $this->data['date_close'],
+            'hour_close' => $this->data['hour_close'],
+            'value_card' => $this->data['value_card'],
+            'value_cash' => $this->data['value_cash'],
+            'value_close' => $this->data['value_close'],
+            'value_open' => $this->data['value_open'],
+            'value_sales' => $this->data['value_sales']
         ];
-        return  $dataClose;
+
+        ClosePos::saveDataClose($data);
+        return $this->data['value_sales'];
     }
 }

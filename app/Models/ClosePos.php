@@ -23,13 +23,14 @@ class ClosePos extends Model
     public static function getDataClose()
     {
         return ClosePos::select(
-            'date_close',
-            'hour_close',
             'value_card',
             'value_cash',
-            'value_close',
-            'value_open',
-            'value_sales'
+            'value_close'
         );
+    }
+
+    public function saveDataClose($data)
+    {
+        return ClosePose::create($data);
     }
 }
