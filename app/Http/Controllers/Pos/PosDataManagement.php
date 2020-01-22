@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Pos;
 use App\Models\ClosePos;
 use App\Models\OpenPos;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class PosDataManagement
 {
@@ -21,6 +23,19 @@ class PosDataManagement
         return OpenPos::getDataOpen()->get()->toArray(); 
     }
 
+    public function updateDataOpen()
+    {
+        try {
+            DB::beginTransaction();
+                $this->deleteDataOpen();
+                return $this->saveDataOpenPos();
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            throw new Exception($exception->getMessage(), 500);
+        }
+    }
+
     public function saveDataOpenPos()
     {
         $data = [
@@ -31,6 +46,11 @@ class PosDataManagement
             'observation' => $this->data['observation']
         ];
         return OpenPos::saveDataOpen($data);
+    }
+
+    private function deleteDataOpen()
+    {
+        return OpenPos::deleteDataOpen();
     }
 
     public function getDataClosePos()

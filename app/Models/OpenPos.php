@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class OpenPos extends Model
 {
@@ -33,6 +34,11 @@ class OpenPos extends Model
     public static function saveDataOpen($data)
     {
         return OpenPos::create($data);
+    }
+
+    public static function deleteDataOpen()
+    {
+        DB::table('open_pos')->truncate();
     }
 
     public static function getValueOpen(): bool
