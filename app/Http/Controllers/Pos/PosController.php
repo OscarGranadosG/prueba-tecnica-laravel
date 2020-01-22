@@ -51,7 +51,7 @@ class PosController extends Controller
     {
         try {
             return response()
-                ->json($this->management->getDataClosePos())
+                ->json(['results' => $this->management->getDataClosePos()])
                 ->setStatusCode(JsonResponse::HTTP_OK);
         } catch (\Exception $exception) {
             return response()

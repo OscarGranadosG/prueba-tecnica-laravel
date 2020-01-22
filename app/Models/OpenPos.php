@@ -40,15 +40,4 @@ class OpenPos extends Model
     {
         DB::table('open_pos')->truncate();
     }
-
-    public static function getValueOpen(): bool
-    {
-        if(OpenPos::select('value_open') == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-
 }

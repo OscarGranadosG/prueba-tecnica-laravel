@@ -18,6 +18,7 @@ class PosDataManagement
         $this->data = $data;
     }
 
+    //Apertura de caja
     public function getDataOpenPos()
     {
         return OpenPos::getDataOpen()->get()->toArray(); 
@@ -53,19 +54,11 @@ class PosDataManagement
         return OpenPos::deleteDataOpen();
     }
 
+
+    //Cierre de caja
     public function getDataClosePos()
     {
-        if(OpenPos::getValueOpen() == false) {
-            return "No se puede mostrar esta información";
-        }
-        else {
-            $dataClose = ClosePos::getDataClose()->get()->toArray();
-            $result = ['msg' => 'Success',
-                    'results' => true,
-                    $dataClose
-                ];
-            return $result;
-        } 
+        return ClosePos::getDataClose()->get()->toArray(); 
     }
 
     public function saveDataClosePos()
@@ -81,6 +74,5 @@ class PosDataManagement
         ];
 
         ClosePos::saveDataClose($data);
-        return $this->data;
     }
 }
