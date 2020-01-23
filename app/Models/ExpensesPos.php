@@ -12,6 +12,13 @@ class ExpensesPos extends Model
 
     protected $fillable = [
         'name',
+        'value_card',
+        'value_cash',
         'value'
     ];
+
+    public static function saveSale($data)
+    {
+        ExpensesPos::create($data);
+    }
 }

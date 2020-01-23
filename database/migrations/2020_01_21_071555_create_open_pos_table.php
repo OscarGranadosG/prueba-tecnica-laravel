@@ -17,9 +17,9 @@ class CreateOpenPosTable extends Migration
             $table->bigIncrements('id');
             $table->date('date_open');
             $table->string('hour_open');
-            $table->integer('value_previous_close');
+            $table->integer('value_previous_close')->nullable();
             $table->integer('value_open');
-            $table->string('observation');
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

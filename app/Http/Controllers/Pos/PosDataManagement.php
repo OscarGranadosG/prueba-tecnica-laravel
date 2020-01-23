@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pos;
 
 use App\Models\ClosePos;
+use App\Models\ExpensesPos;
 use App\Models\OpenPos;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +73,19 @@ class PosDataManagement
             'value_open' => $this->data['value_open'],
             'value_sales' => $this->data['value_sales']
         ];
-
         ClosePos::saveDataClose($data);
+    }
+
+    //Guarda venta
+    public function saveSaleData()
+    {
+        $data_sale = [
+            'name' => $this->data['name'],
+            'value_card' => $this->data['value_card'],
+            'value_cash' => $this->data['value_cash'],
+            'value' => $this->data['value_card'] + $this->data['value_cash'] 
+        ];
+        ExpensesPos::saveSale($data_sale);
+        return $this->data['value_card'] + $this->data['value_cash'];
     }
 }

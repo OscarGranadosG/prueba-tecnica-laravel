@@ -27,4 +27,5 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('cashier/balance/open/day', 'Pos\PosController@saveOpenPos');
     Route::get('has/open/cashier/balance', 'Pos\PosController@getClosePos');
     Route::post('cashier/balance/close/day', 'Pos\PosController@saveClosePos');
+    Route::post('save/sale', 'Pos\PosController@saveSale');
 });

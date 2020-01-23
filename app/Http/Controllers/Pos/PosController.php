@@ -76,4 +76,21 @@ class PosController extends Controller
                 ->setStatusCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function saveSale(Request $request)
+    {
+        $data = $request->all();
+        $this->management->setData($data);
+
+        try {
+            return response()
+                ->json(['msg' => 'Venta realizada OK',
+                'total' => $this->management->saveSaleData()])
+                ->setStatusCode(JsonResponse::HTTP_OK);
+        } catch (\Exception $exception) {
+            return response()
+                ->json(['error' => $exception->getMessage()])
+                ->setStatusCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
