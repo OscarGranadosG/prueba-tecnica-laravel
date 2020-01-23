@@ -68,7 +68,7 @@ class PosController extends Controller
         try {
             return response()
                 ->json(['msg' => 'Informacion guardada con exito',
-                    'results' => $this->management->saveDataClosePos()])
+                    'results' => $this->management->updateDataClose()])
                 ->setStatusCode(JsonResponse::HTTP_OK);
         } catch (\Exception $exception) {
             return response()

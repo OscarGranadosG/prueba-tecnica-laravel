@@ -59,7 +59,24 @@ class PosDataManagement
     //Cierre de caja
     public function getDataClosePos()
     {
-        return ClosePos::getDataClose()->get()->toArray(); 
+        $expenses = ExpensesPos::getCloseData()->get()->toArray();
+        $value_open = OpenPos::getValueOpen()->get()->toArray();
+
+        return array_merge($expenses, $value_open);
+    }
+
+    public function updateDataClose()
+    {
+        try {
+            DB::beginTransaction();
+                $this->deleteDataClose();
+                $this->saveDataClosePos();
+                return ClosePos::getResultClose()->get();
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            throw new Exception($exception->getMessage(), 500);
+        }
     }
 
     public function saveDataClosePos()
@@ -74,6 +91,11 @@ class PosDataManagement
             'value_sales' => $this->data['value_sales']
         ];
         ClosePos::saveDataClose($data);
+        
+    }
+
+    private function deleteDataClose() {
+        return ClosePos::deleteDataClose();
     }
 
     //Guarda venta

@@ -40,4 +40,9 @@ class OpenPos extends Model
     {
         DB::table('open_pos')->truncate();
     }
+
+    public static function getValueOpen()
+    {
+        return OpenPos::select('value_open', 'id');
+    }
 }
